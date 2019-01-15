@@ -4,11 +4,29 @@
 
     <!-- hint or ask in various input -->
     <string name="hintText">Text ..</string>
-    <string name="enterTxt">Please enter a text below</string>
+    <string name="enterTxt">Please enter your data below</string>
+    <string name="chooseType">Choose your type of QRCode output</string>
+    <string name="noData">No data selected</string>
+
+    <string name="inDev">In development</string>
+
+    <!-- form label -->
+    <string name="name">Name</string>
+    <string name="adress">Adress</string>
+    <string name="tel">Phone number</string>
+    <string name="email">Email</string>
+    <string name="note">Note</string>
+    <string name="url">Website</string>
+    
+    <string name="vCardVersion">4.0</string>
 
     <!-- Actions on btn or elese -->
     <string name="cancel">Cancel</string>
     <string name="btnRun">Run</string>
     <string name="btnGoText">To Text</string>
     <string name="choose_text_file">Choose file</string>
+    <string name="title_activity_main">MainActivity</string>
+    <string name="title_home">Home</string>
+    <string name="title_dashboard">Dashboard</string>
+    <string name="title_notifications">Notifications</string>
 </resources>

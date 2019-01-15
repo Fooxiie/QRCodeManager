@@ -26,7 +26,7 @@ public class QrCodeShowText extends AppCompatActivity {
         if (intent != null) {
             textToTranslate = intent.getString("textQR");
         } else {
-            startActivity(new Intent(this, MainActivity.class));
+            Toast.makeText(this, "Travaille", Toast.LENGTH_SHORT).show();
         }
 
         try {
