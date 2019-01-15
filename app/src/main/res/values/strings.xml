@@ -1,0 +1,14 @@
+<resources>
+    <!-- Global text in the app -->
+    <string name="app_name">QRCodeManager</string>
+
+    <!-- hint or ask in various input -->
+    <string name="hintText">Text ..</string>
+    <string name="enterTxt">Please enter a text below</string>
+
+    <!-- Actions on btn or elese -->
+    <string name="cancel">Cancel</string>
+    <string name="btnRun">Run</string>
+    <string name="btnGoText">To Text</string>
+    <string name="choose_text_file">Choose file</string>
+</resources>
