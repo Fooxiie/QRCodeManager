@@ -4,14 +4,13 @@ import android.content.Intent
 import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
 import android.support.v7.app.AlertDialog
-import android.view.MotionEvent
 import android.view.View
 import android.widget.Toast
 import com.google.zxing.integration.android.IntentIntegrator
-import com.google.zxing.integration.android.IntentResult
 import kotlinx.android.synthetic.main.activity_main.*
 import kotlinx.android.synthetic.main.form_email.view.*
 import kotlinx.android.synthetic.main.form_sms.view.*
+import kotlinx.android.synthetic.main.form_text.view.*
 
 class MainActivity : AppCompatActivity() {
 
@@ -59,12 +58,24 @@ class MainActivity : AppCompatActivity() {
         when (choice) {
             typeItems[0] -> buildAlertForText(typeItems[0])
             typeItems[1] -> buildAlertForSMS(typeItems[1])
-            typeItems[2] -> Toast.makeText(applicationContext, getString(R.string.inDev), Toast.LENGTH_SHORT).show()
-            typeItems[3] -> Toast.makeText(applicationContext, getString(R.string.inDev), Toast.LENGTH_SHORT).show()
-            else -> Toast.makeText(applicationContext, getString(R.string.noData), Toast.LENGTH_SHORT).show()
+            typeItems[2] -> buildAlertForEmail(typeItems[2])
+            // Le type URL ne possède pas de particularité alors la même méthode que
+            // pour un text banal peut etre utilisé
+            typeItems[3] -> buildAlertForText(typeItems[3])
+            typeItems[4] -> Toast.makeText(applicationContext, "In deveopement", Toast.LENGTH_SHORT).show()
+            typeItems[5] -> buildAlertForCrypted(typeItems[5])
+            else -> Toast.makeText(applicationContext, getString(R.string.noData),
+                        Toast.LENGTH_SHORT).show()
         }
     }
 
+    private fun buildAlertForCrypted(s: String) {
+
+    }
+
+    /*
+     * envoie du simple text elle extend donc son utilisation pour les URLS aussi
+     */
     private fun buildAlertForText(str: String) {
         var alert = AlertDialog.Builder(this)
         var view = layoutInflater.inflate(R.layout.form_text, null)
@@ -76,7 +87,8 @@ class MainActivity : AppCompatActivity() {
                     startActivity(i)
                 }
                 .setNegativeButton(getString(R.string.cancel)) { dialog, p1 ->
-                    Toast.makeText(applicationContext, getString(R.string.cancel), Toast.LENGTH_SHORT).show()
+                    Toast.makeText(applicationContext, getString(R.string.cancel),
+                                Toast.LENGTH_SHORT).show()
                 }
                 .create()
                 .show()
@@ -89,12 +101,34 @@ class MainActivity : AppCompatActivity() {
                 .setView(view)
                 .setPositiveButton(getString(R.string.btnRun)) { dialog, p1 ->
                     var i = Intent(applicationContext, QrCodeShowText::class.java)
-                    var strSms = "sms:" + view.form_input_number.text.toString() + ":" + view.form_input_msg_sms.text.toString()
+                    var strSms = "sms:" + view.form_input_number.text.toString() + ":" +
+                            view.form_input_msg_sms.text.toString()
                     i.putExtra("textQR", strSms)
                     startActivity(i)
                 }
                 .setNegativeButton(getString(R.string.cancel)) { dialog, p1 ->
-                    Toast.makeText(applicationContext, getString(R.string.cancel), Toast.LENGTH_SHORT).show()
+                    Toast.makeText(applicationContext, getString(R.string.cancel),
+                                Toast.LENGTH_SHORT).show()
+                }
+                .create()
+                .show()
+    }
+
+    private fun buildAlertForEmail(str : String) {
+        var alert = AlertDialog.Builder(this)
+        var view = layoutInflater.inflate(R.layout.form_email, null)
+        alert.setTitle(str)
+                .setView(view)
+                .setPositiveButton(getString(R.string.btnRun)) { dialog, p1 ->
+                    var i = Intent(applicationContext, QrCodeShowText::class.java)
+                    var strSms = "email:" + view.form_input_email.text.toString() + ":" +
+                            view.form_input_msgEmail.text.toString()
+                    i.putExtra("textQR", strSms)
+                    startActivity(i)
+                }
+                .setNegativeButton(getString(R.string.cancel)) { dialog, p1 ->
+                    Toast.makeText(applicationContext, getString(R.string.cancel),
+                                Toast.LENGTH_SHORT).show()
                 }
                 .create()
                 .show()

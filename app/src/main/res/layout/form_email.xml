@@ -14,7 +14,7 @@
         android:textStyle="bold" />
 
     <EditText
-        android:id="@+id/form_input_text"
+        android:id="@+id/form_input_email"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_margin="15dp"
@@ -23,7 +23,7 @@
         android:inputType="textEmailAddress" />
 
     <EditText
-        android:id="@+id/form_input_msg"
+        android:id="@+id/form_input_msgEmail"
         android:layout_width="match_parent"
         android:layout_height="98dp"
         android:layout_margin="15dp"
