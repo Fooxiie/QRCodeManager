@@ -4,8 +4,12 @@ import android.content.Intent
 import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
 import android.support.v7.app.AlertDialog
+import android.view.MotionEvent
 import android.view.View
 import android.widget.Toast
+import com.google.zxing.integration.android.IntentIntegrator
+import com.google.zxing.integration.android.IntentResult
+import kotlinx.android.synthetic.main.activity_main.*
 import kotlinx.android.synthetic.main.form_email.view.*
 import kotlinx.android.synthetic.main.form_sms.view.*
 
@@ -17,6 +21,25 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
+        var ii = IntentIntegrator(this)
+
+        txt_run_scan.setOnClickListener() {
+            ii.setBeepEnabled(false)
+            ii.initiateScan()
+        }
+    }
+
+    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
+        var result = IntentIntegrator.parseActivityResult(requestCode, resultCode, data)
+        if (result != null) {
+            if (result.contents == null) {
+                Toast.makeText(applicationContext, "No found data", Toast.LENGTH_SHORT).show()
+            } else {
+                Toast.makeText(applicationContext, result.contents, Toast.LENGTH_LONG).show()
+            }
+        } else {
+            super.onActivityResult(requestCode, resultCode, data)
+        }
     }
 
     fun onClickActionBtn(view : View) {
